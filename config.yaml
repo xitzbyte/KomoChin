@@ -1,0 +1,378 @@
+# -------------------------------------------------------------------
+## MIT License
+
+## Copyright (c) 2025 xitzbyte
+
+## Permission is hereby granted, free of charge, to any person obtaining a copy
+## of this software and associated documentation files (the "Software"), to deal
+## in the Software without restriction, including without limitation the rights
+## to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+## copies of the Software, and to permit persons to whom the Software is
+## furnished to do so, subject to the following conditions:
+
+## The above copyright notice and this permission notice shall be included in all
+## copies or substantial portions of the Software.
+
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+## IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+## AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+## OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+## SOFTWARE.
+# -------------------------------------------------------------------
+
+watch_stylesheet: true
+watch_config: true
+debug: false
+update_check: true
+komorebi:
+  start_command: "komorebic start --whkd"
+  stop_command: "komorebic stop --whkd"
+  reload_command: "komorebic reload-configuration"
+bars:
+  primary-bar:
+    enabled: true
+    screens: ['*'] 
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: true
+    blur_effect:
+      enabled: true 
+      acrylic: true 
+      dark_mode: true
+      round_corners: false
+      border_color: None
+    window_flags:
+      always_on_top: false
+      windows_app_bar: true
+    dimensions:
+      width: "100%"
+      height: 32
+    padding:
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+    widgets:
+      left: [
+        "home",
+        "cpu",
+        "memory",
+        "volume",
+        "cava",
+        "launchpad",
+        "systray",
+        "komorebi_active_layout",
+        "komorebi_workspaces"
+      ]
+      center: [
+        "clock",
+        "notifications",
+      ]
+      right: [
+        "wifi",
+        "traffic",
+        "battery",
+      ]
+widgets:
+
+#Left
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      label: "<span>\uea7a</span>"
+      menu_list:
+        - { title: "Home", path: "~" }
+        - { title: "Downloads", path: "~\\Downloads"}
+        - { title: "Documents", path: "~\\Documents"}
+        - { title: "Pictures", path: "~\\Pictures"}
+        - { title: "Videos", path: "~\\Videos"}
+      system_menu: true
+      power_menu: true
+      blur: true
+      alignment: "left"
+      offset_top: 0
+      offset_left: 2
+
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span> {info[percent][total]}%"
+      label_alt: "<span>\uf4bc</span> {info[histograms][cpu_percent]}"
+      update_interval: 1000
+      histogram_num_columns: 8
+      histogram_icons:
+        - "\u2581" # 0%
+        - "\u2581" # 10%
+        - "\u2582" # 20%
+        - "\u2583" # 30%
+        - "\u2584" # 40%
+        - "\u2585" # 50%
+        - "\u2586" # 60%
+        - "\u2587" # 70%
+        - "\u2588" # 80%+
+      callbacks:
+        on_left: "toggle_label"
+        on_right: "exec cmd /c Taskmgr"
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 5
+        offset: [0, 0]
+
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uefc5</span> {virtual_mem_used}/{virtual_mem_total}"
+      update_interval: 5000
+      callbacks:
+        on_left: "do_nothing"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 5
+        offset: [0, 0]
+
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span>{level}"
+      tooltip: false
+      volume_icons:
+        - "<span> \udb81\udf5f </span>" # muted
+        - "<span> \udb81\udd7f </span>" # 0-10% 
+        - "<span> \udb81\udd80 </span>" # 11-30% 
+        - "<span> \udb81\udd80 </span>" # 31-60% 
+        - "<span> \udb81\udd7e </span>" # 61-100% 
+      audio_menu:
+        blur: true
+        round_corners: true
+        alignment: "left"
+        direction: "down"
+        offset_top: true
+      callbacks:
+        on_left: "toggle_mute"
+        on_right: "toggle_volume_menu"
+
+  cava:
+    type: "yasb.cava.CavaWidget"
+    options:
+      bar_height: 12
+      gradient: 0
+      reverse: 0
+      foreground: "#c3dafe"
+      bars_number: 20
+      bar_spacing: 1
+      bar_width: 2
+      noise_reduction: 50
+      sleep_timer: 2
+      hide_empty: true
+      container_padding:
+        top: 0
+        left: 4
+        bottom: 0
+        right: 4
+
+  launchpad:
+    type: "yasb.launchpad.LaunchpadWidget"
+    options:
+      label: "<span>\udb84\udcf6</span>"
+      search_placeholder: "Search applications"
+      app_icon_size: 48
+      window:
+        fullscreen: false
+        width: 800
+        height: 600
+      window_style:
+        enable_blur: true
+        round_corners: true
+      window_animation:
+        fade_in_duration: 200
+        fade_out_duration: 100
+      callbacks:
+        on_left: "toggle_launchpad"
+  
+  systray:
+    type: "yasb.systray.SystrayWidget"
+    options:
+      class_name: "systray"
+      label_collapsed: "\ueac5"
+      label_expanded: "\udb82\udeb4"
+      show_unpinned: false
+      show_unpinned_button: true
+      show_battery: false
+      show_volume: false
+      show_network: false
+
+  komorebi_active_layout:
+    type: "komorebi.active_layout.ActiveLayoutWidget"
+    options:
+      hide_if_offline: true
+      label: "{icon}"
+      layouts:
+        - "bsp"
+        - "columns"
+        - "rows"
+        - "grid"
+        - "scrolling"
+        - "vertical_stack"
+        - "horizontal_stack"
+        - "ultrawide_vertical_stack"
+        - "right_main_vertical_stack"
+      layout_icons:
+        bsp: "\uebeb"
+        columns: "\uebf7"
+        rows: "\uec01"
+        grid: "\udb81\udf58"
+        scrolling: "\uebf7"
+        vertical_stack: "\uebee"
+        horizontal_stack: "\uebf0"
+        ultrawide_vertical_stack: "\uebee"
+        right_main_vertical_stack: "\uebf1"
+        monocle: "\uf06f"
+        maximized: "\uf06f"
+        floating: "\uf2d2"
+        paused: "\udb83\udf89"
+        tiling: "\udb81\ude40"
+      callbacks:
+        on_left: "toggle_layout_menu"
+        on_middle: "toggle_tiling"
+        on_right: "next_layout"
+      layout_menu:
+        blur: true
+        round_corners: true
+        alignment: "left"
+        direction: "down"
+        offset_top: true
+        show_layout_icons: true
+
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
+    options:
+      hide_if_offline: true
+      label_zero_index: false
+      hide_empty_workspaces: true
+      hide_if_offline: true
+
+#Center
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "<span>\udb80\udcf0</span> {%I:%M %p}"
+      label_alt: "<span>\udb80\udcf0</span> {%A, %d %B %Y}"
+      update_interval: 1000
+      tooltip: false
+      calendar:
+        blur: true
+        round_corners: true
+        alignment: "center"
+        direction: "down"
+        offset_top: true
+      callbacks:
+        on_left: "toggle_label"
+        on_right: "toggle_calendar"
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 5
+        offset: [0, 0]
+
+  notifications:
+    type: "yasb.notifications.NotificationsWidget"
+    options:
+      label: "<span>\udb80\udc9e</span>{count}"
+      label_alt: "<span>\udb80\udc9e</span>{count} notifications(s)"
+      hide_empty: true
+      tooltip: false
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "clear_notifications"
+        on_right: "toggle_notification"
+      container_padding:
+        top: 0
+        left: 10
+        bottom: 0
+        right: 10
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 5
+        offset: [0, 0]
+
+#Right
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+    options:
+      label: "<span>{wifi_icon}</span> {wifi_strength}%"
+      label_alt: "<span>{wifi_icon}</span> {wifi_name} {wifi_strength}%"
+      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label_alt: "<span>{wifi_icon}</span> {wifi_name}"
+      ethernet_icon: "\uf108"
+      update_interval: 5000
+      callbacks:
+        on_right: "exec cmd.exe /c start ms-settings:network"
+      wifi_icons: [
+        "\udb82\udd2e",  # 0% 
+        "\udb82\udd1f",  # 1-20% 
+        "\udb82\udd22",  # 21-40% 
+        "\udb82\udd25",  # 41-80%
+        "\udb82\udd28"   # 81-100%
+      ]
+
+  traffic:
+    type: "yasb.traffic.TrafficWidget"
+    options:
+      hide_if_offline: true
+      label: "<span> \uf409 </span> {download_speed} <span> \uf40a </span> {upload_speed}"
+      update_interval: 1000
+      menu:
+        round_corners: true
+        alignment: "center"
+        direction: "down"
+        offset_top: true
+      callbacks:
+        on_left: "do_nothing"
+        on_right: "toggle_menu"
+
+  battery:
+    type: "yasb.battery.BatteryWidget"
+    options:
+      hide_unsupported: true
+      label: "<span>{icon}</span>{percent}%"
+      label_alt: "<span>{icon}</span> {percent}% | time: {time_remaining}"
+      update_interval: 5000
+      charging_options:
+        icon_format: "\udb80\udc84" 
+      status_thresholds:
+        critical: 10
+        low: 35
+        medium: 70
+        high: 95
+        full: 100
+      status_icons:
+        icon_charging: "\uf0e7"
+        icon_critical: "\udb80\udc7a"
+        icon_low: "\udb80\udc7c"
+        icon_medium: "\udb80\udc80"
+        icon_high: "\udb80\udc82"
+        icon_full: "\udb80\udc79"
+  
