@@ -1,2 +1,2 @@
 # KomoChin
-<img width="731" height="385" alt="image" src="https://github.com/user-attachments/assets/0d3e8243-230e-4eea-b6b2-f18670d4a67f" />
+<img width="1759" height="32" alt="image" src="https://github.com/user-attachments/assets/fe1baeb5-2c5d-4f0c-a123-5be90e9b8252" />
