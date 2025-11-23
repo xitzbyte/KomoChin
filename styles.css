@@ -1,0 +1,493 @@
+/*
+
+Copyright (c) 2025 xitzbyte
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/*Note: I am very new to CSS and my naming convention sucks */
+
+:root {
+  --text: #a7b0cc;
+  --hushtext: #dadada43; /*firsrtly uhh idc*/
+  --importanttext: #ffffff;
+  --goaltext: rgba(11, 238, 238, 0.67);  
+  --truetext: rgb(10, 233, 10);
+  --falsetext: rgb(233, 10, 10);        
+  --background: rgba(0, 0, 0, 0.6);
+  --truebackground: rgba(10, 233, 10, 0.373); 
+  --falsebackground: rgba(246, 16, 16, 0.56); 
+  --border: 2px solid rgba(205, 214, 244, 0.2);
+  --hoverborder: 1px solid #ffffffac;
+  --header: rgba(0, 0, 0, 0.286);   
+  --surface: #1b1a1a5a;
+  --overlay: rgba(0, 0, 0, 0.4);     
+  --seperator: rgba(128, 130, 158, 0.3);
+}
+
+* {
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 700;
+  font-family: "JetBrainsMono NFP";
+  margin: 0;
+  padding: 0;
+}
+
+.yasb-bar {
+  background-color: var(--background);
+}
+
+.widget {
+  padding: 0 3px;
+  margin: 0 5px;
+}
+.widget .label {
+  padding: 0px 2px;
+}
+.widget .label.alt {
+  padding: 0px 2px;
+}
+
+.icon {
+  font-size: 16px;
+  margin: 0 4px 0 0;
+}
+
+/*Left */
+.home-widget {
+  padding: 0 4px 0 4px;
+}
+.home-widget .icon {
+  font-size: 24px; 
+}
+.home-menu {
+  background-color: var(--overlay);
+  margin-left: 2px;
+}
+.home-menu .menu-item {
+  padding: 8px 48px 8px 12px;
+  font-weight: 600;
+  font-size: 11px; 
+  color: var(--importanttext);
+}
+.home-menu .menu-item:hover {
+  border: var(--hoverborder);
+}
+.home-menu .separator {
+  max-height: 2px;
+  background-color: var(--seperator);
+}
+
+.cpu-widget .label {
+  width: 41px;
+  min-width: 41px;
+  max-width: 41px;
+}
+
+.volume-widget .icon {
+  font-size: 21px; 
+  color: var(--importanttext);
+}
+.volume-widget .label {
+  width: 41px;
+  min-width: 41px;
+  max-width: 41px;
+  color: var(--importanttext);
+}
+.audio-menu {
+  background-color: var(--overlay);
+  border: var(--border);
+}
+.audio-menu .system-volume-container .volume-slider {
+  border: none;
+}
+
+.launchpad-widget {
+  padding: 0 6px 0 6px;
+}
+.launchpad-widget .icon {
+  font-size: 20px;
+}
+.launchpad .context-menu {
+  background-color: var(--overlay);
+  border: var(--border);
+  border-radius: 9;
+  margin-left: 2px;
+}
+.launchpad .context-menu::item {
+  padding: 8px 48px 8px 12px;
+  font-weight: 600;
+  font-size: 11px; 
+  color: var(--importanttext);
+}
+.launchpad .context-menu::item:selected {
+  border: var(--hoverborder); 
+}
+.launchpad .context-menu::separator {
+  height: 2px;
+  background-color: var(--seperator);
+}
+.launchpad .context-menu::item:disabled {
+  color: transparent;
+  background-color: transparent;
+}
+.launchpad .app-dialog {
+  background-color: var(--surface); /*nooo whyyyyy os window grrrrrrrrrrrrrr */
+}
+.launchpad .app-dialog .title-field,
+.launchpad .app-dialog .path-field,
+.launchpad .app-dialog .icon-field {
+  border: var(--border);
+  padding: 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--importanttext);
+  margin: 10px 0px 5px 0;
+  min-height: 30px;
+}
+.launchpad .app-dialog .button {
+  background-color: #2d2d2d;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--importanttext);
+  min-width: 40px;
+  padding: 0 6px;
+  margin: 10px 0 5px 6px;
+  min-height: 28px;
+  outline: none;
+}
+.launchpad .app-dialog .buttons-container .button {
+  margin: 10px 0 5px 0px;
+  font-size: 13px;
+}
+.launchpad .app-dialog .button:hover {
+  border: var(--hoverborder);
+}
+.launchpad .app-dialog .button.add,
+.launchpad .app-dialog .button.save {
+  background-color: var(--truebackground);
+  color: var(--truetext);
+}
+.launchpad .app-dialog .button.delete {
+  background-color: var(--falsebackground);
+  color: var(--falsetext);
+}
+.launchpad .app-dialog .warning-message {
+  background-color: var(--falsebackground);
+  color: var(--falsetext);
+  font-size: 20px;
+  font-weight: 200;
+  padding: 8px 12px;
+  margin: 4px 0px;
+}
+.launchpad .launchpad-container {
+  background-color: var(--overlay);
+  border: var(--border);
+}
+.launchpad .search-container {
+  border-bottom: 3px solid var(--seperator);
+  background-color:var(--header);
+  min-height: 40px;
+  margin: 0;
+  padding: 0
+}
+.launchpad .search-input {
+  max-width: 200px;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: var(--hushtext);
+}
+.launchpad .label {
+  color: var(--hushtext);
+}
+
+.launchpad .launchpad-scroll-area {
+  background-color: transparent;
+  border: none;
+}
+.launchpad .app-icon {
+  border-radius: 12px;
+  padding-top: 10px;
+  margin: 24px 6px 6px 6px;
+  max-width: 70px;
+  min-width: 70px;
+  min-height: 90px;
+  max-height: 90px; 
+}
+.launchpad .app-icon:hover {
+  border: var(--hoverborder);
+}
+.launchpad .app-icon .title {
+  color: var(--importanttext);
+  font-size: 14px;
+  margin-top: 2px;
+  font-weight: 600
+}
+.launchpad .app-icon .icon {
+  padding: 0;
+  margin: 0
+}
+
+.systray {
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+.systray .button {
+  border: none;
+  padding: 2px 2px;
+}
+.systray .button:hover {
+  border: var(--hoverborder);
+}
+.systray .unpinned-visibility-btn {
+  border-radius: 4px;
+  height: 20px;
+  width: 16px;
+}
+.systray .unpinned-visibility-btn:hover {
+  border: 1px solid #AAAAAA;
+  border-radius: 4px;
+  border-color: #AAAAAA;
+}
+
+.komorebi-active-layout .label {
+  color: var(--importanttext);
+  font-size: 16px;
+}
+.komorebi-layout-menu {
+  border: var(--border);
+  background-color: var(--overlay);
+}
+.komorebi-layout-menu .menu-item {
+  padding: 2px 13px;
+  color: var(--importanttext);
+}
+.komorebi-layout-menu .menu-item-icon {
+  color: var(--importanttext);
+  font-size: 16px;
+}
+.komorebi-layout-menu .menu-item-text {
+  padding-left: 2px;
+  color: var(--importanttext);
+  font-size: 12px;
+}
+.komorebi-layout-menu .menu-item:hover {
+  border: var(--hoverborder);
+}
+.komorebi-layout-menu .separator {
+  max-height: 2px;
+  background-color: var(--seperator);
+}
+.komorebi-workspaces .ws-btn {
+  font-size: 12px;
+}
+.komorebi-workspaces .ws-btn.active {
+  color: var(--importanttext);
+}
+
+/*Center */
+.clock-widget .icon,
+.clock-widget .label {
+  color: var(--importanttext);
+  padding: 0 4px 0 4px;
+}
+
+.calendar {
+  background-color: var(--overlay);
+  border: var(--border);
+}
+.calendar .calendar-table,
+.calendar .calendar-table::item {
+  background-color: transparent;
+  color: var(--importanttext);
+}
+.calendar .calendar-table::item:hover {
+  border: var(--hoverborder);
+}
+.calendar .calendar-table::item:selected {
+  background-color: transparent;
+}
+.calendar .day-label,
+.calendar .month-label,
+.calendar .date-label {
+  color: var(--importanttext);
+  min-width: 120px;
+  max-width: 120px;
+}
+.calendar .day-label {
+  font-size: 20px;
+  margin-top: 10px;
+}
+.calendar .month-label {
+  font-size: 12px;
+}
+.calendar .date-label {
+  font-size: 88px;
+  margin-top: -10px;
+}
+
+.notification-widget .icon,
+.notification-widget .icon.new-notification,
+.notification-widget .label.new-notification {
+    color: var(--importanttext);
+}
+
+/*Right */
+.wifi-widget .widget-container .icon {
+  color: var(--importanttext);
+  width: 22px;
+  min-width: 22px;
+  max-width: 22px;
+}
+.wifi-widget .widget-container .label {
+  color: var(--importanttext);
+}
+
+.traffic-widget {
+  padding-left: 0;
+  width: 180px;
+  min-width: 180px;
+  max-width: 190px;
+  padding-right: 10px;
+}
+.traffic-widget .download {
+  padding-top: 4px;
+  font-weight: bold;
+  font-size: 12px;
+}
+.traffic-widget .upload {
+  padding-top: 4px;
+}
+
+.traffic-menu {
+  background-color: var(--overlay);
+  border: var(--border);
+  min-width: 280px;
+}
+.traffic-menu .header {
+  background-color: var(--header);
+  border-bottom: var(--seperator);
+}
+.traffic-menu .header .title {
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--importanttext)
+}
+.traffic-menu .header .reset-button {
+  font-size: 14px;
+  font-weight: 800;
+  padding: 4px 20px;
+  background-color: transparent;
+  color: var(--importanttext);
+  border: none;
+}
+.traffic-menu .reset-button:pressed {
+  color: var(--subtext);
+}
+.traffic-menu .download-speed,
+.traffic-menu .upload-speed {
+  padding: 4px 10px;
+  margin-right: 12px;
+  margin-left: 12px;
+  margin-top: 16px;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(--seperator);
+}
+.traffic-menu .download-speed {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+.traffic-menu .speed-separator {
+  max-width: 1px;
+  background-color: var(--seperator);
+  margin: 32px 0 16px 0;
+}
+.traffic-menu .upload-speed-value,
+.traffic-menu .download-speed-value {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--importanttext);
+}
+.traffic-menu .upload-speed-unit,
+.traffic-menu .download-speed-unit {
+  font-size: 13px;
+  font-weight: 600;
+  padding-top: 4px;
+}
+.traffic-menu .upload-speed-placeholder,
+.traffic-menu .download-speed-placeholder {
+  color: var(--importanttext);
+  font-size: 11px;
+  padding: 0 0 4px 0;
+}
+
+.traffic-menu .section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--goaltext);
+  margin-bottom: 4px;
+}
+.traffic-menu .session-section,
+.traffic-menu .today-section,
+.traffic-menu .alltime-section {
+  margin: 8px 8px 0 8px;
+  padding: 0 10px 10px 10px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.traffic-menu .data-text {
+  font-size: 13px;
+  color: var(--importanttext);
+  padding: 4px 5px;
+}
+.traffic-menu .data-value {
+  font-weight: 600;
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.traffic-menu .interface-info,
+.traffic-menu .internet-info {
+  font-size: 12px;
+  color: var(--importanttext);
+  padding: 8px 0;
+}
+.traffic-menu .internet-info {
+  background-color: rgba(68, 68, 68, 0.1);
+}
+.traffic-menu .internet-info.connected {
+  background-color: --(--truebackground);
+  color: var(--truetext);
+}
+.traffic-menu .internet-info.disconnected {
+  background-color: var(--falsebackground);
+  color: var(--falsetext);
+}
+
+.battery-widget .widget-container .icon,
+.battery-widget .widget-container .label.alt,
+.battery-widget .widget-container .label {
+  color: var(--importanttext);
+}
